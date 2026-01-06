@@ -13,10 +13,17 @@ const app = express();
 
 app.set('trust proxy', 1);
 
-const mongoUrl = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/myAppDB";
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+if (!process.env.MONGODB_URI) {
+  console.error("ERROR: MONGODB_URI environment variable not set");
+  process.exit(1);
+}
+
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1); 
+  });
 
   
 const rewriteUnsupportedBrowserMethods = (req, res, next) => {
@@ -78,6 +85,11 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
+if (!process.env.SESSION_SECRET) {
+  console.error("ERROR: SESSION_SECRET environment variable not set");
+  process.exit(1);
+}
+
 app.use(
   session({
     name: "AuthenticationState",
@@ -85,7 +97,7 @@ app.use(
     saveUninitialized: false,
     resave: false,
     store: MongoStore.create({
-      mongoUrl,
+      mongoUrl: process.env.MONGODB_URI,
       ttl: 60 * 60, // 1 hour
       autoRemove: "native",
     }),
@@ -97,6 +109,7 @@ app.use(
     },
   })
 );
+
 
 // Log session for debugging
 app.use((req, res, next) => {
