@@ -19,9 +19,6 @@ Motor vehicle accidents remain one of the leading causes of premature death in t
 
 Looking ahead, as autonomous vehicles and self-driving taxis become more common on city streets, the platform will also serve as a valuable public resource for monitoring, verifying, and improving the safety and accountability of these emerging transportation technologies.
 
-### GitHub Repo
-https://github.com/1jkeepers3/CS-546A-Group-21-Project
-
 ## Dataset
 
 - **Motor Vehicle Collisions – Crashes (NYC Open Data)**:  
@@ -45,10 +42,4 @@ npm run seed
 
 ```
 npm start
-```
-
-### 4. Open the application
-
-```
-http://localhost:3000/crashes
 ```
