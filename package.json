@@ -20,11 +20,13 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
+    "connect-mongo": "^6.0.0",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "express-handlebars": "^8.0.4",
     "express-session": "^1.18.2",
     "mongodb": "^7.0.0",
+    "mongoose": "^9.1.2",
     "multer": "^2.0.2",
     "nodemailer": "^7.0.11",
     "xss": "^1.0.15"
